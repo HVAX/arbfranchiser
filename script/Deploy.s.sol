@@ -8,13 +8,13 @@ import {FranchiserFactory} from "../src/FranchiserFactory.sol";
 import {FranchiserLens} from "../src/FranchiserLens.sol";
 
 contract Deploy is Script {
-    IVotingToken private constant UNI =
-        IVotingToken(0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984);
+    IVotingToken private constant ARB =
+        IVotingToken(0x912CE59144191C1204E64559FE8253a0e49E6548);
 
     function run() public {
         vm.startBroadcast();
-        FranchiserFactory franchiserFactory = new FranchiserFactory(UNI);
-        new FranchiserLens(UNI, franchiserFactory);
+        FranchiserFactory franchiserFactory = new FranchiserFactory(ARB);
+        new FranchiserLens(ARB, franchiserFactory);
         vm.stopBroadcast();
     }
 }

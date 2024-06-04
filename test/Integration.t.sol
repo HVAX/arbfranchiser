@@ -35,8 +35,8 @@ interface IGovernorBravo {
 }
 
 contract IntegrationTest is Test {
-    IVotingToken private constant UNI =
-        IVotingToken(0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984);
+    IVotingToken private constant ARB =
+        IVotingToken(0x912CE59144191C1204E64559FE8253a0e49E6548);
     ITimelock private constant TIMELOCK =
         ITimelock(0x1a9C8182C09F50C8318d769245beA52c32BE35BC);
     IGovernorBravo private constant GOVERNOR_BRAVO =
@@ -46,7 +46,7 @@ contract IntegrationTest is Test {
 
     function setUp() public {
         vm.startPrank(address(0));
-        franchiserFactory = new FranchiserFactory(UNI);
+        franchiserFactory = new FranchiserFactory(ARB);
         // fund the timelock with 1 ETH to send txs
         (bool success, ) = address(TIMELOCK).call{value: 1e18}("");
         assert(success);
@@ -57,19 +57,19 @@ contract IntegrationTest is Test {
         uint256 quorumVotes = GOVERNOR_BRAVO.quorumVotes();
 
         vm.startPrank(address(TIMELOCK));
-        UNI.approve(address(franchiserFactory), quorumVotes);
+        ARB.approve(address(franchiserFactory), quorumVotes);
         franchiserFactory.fund(Utils.alice, quorumVotes);
         vm.stopPrank();
 
-        // encode a call to send 1 wei of UNI to alice
+        // encode a call to send 1 wei of ARB to alice
         address[] memory targets = new address[](1);
         uint256[] memory values = new uint256[](1);
         string[] memory signatures = new string[](1);
         bytes[] memory calldatas = new bytes[](1);
-        targets[0] = address(UNI);
+        targets[0] = address(ARB);
         calldatas[0] = abi.encodeCall(IERC20.transfer, (Utils.alice, 1));
 
-        uint256 aliceBalance = UNI.balanceOf(Utils.alice);
+        uint256 aliceBalance = ARB.balanceOf(Utils.alice);
 
         // advance the block number so that alice's votes are locked in
         vm.roll(block.number + 1);
@@ -95,6 +95,6 @@ contract IntegrationTest is Test {
         vm.warp(block.timestamp + TIMELOCK.delay());
         GOVERNOR_BRAVO.execute(proposalId);
 
-        assertEq(UNI.balanceOf(Utils.alice), aliceBalance + 1);
+        assertEq(ARB.balanceOf(Utils.alice), aliceBalance + 1);
     }
 }
