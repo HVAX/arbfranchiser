@@ -15,10 +15,10 @@
 - `source .env`
 - `forge script script/Deploy.s.sol:Deploy --broadcast --private-key $PRIVATE_KEY --rpc-url $RPC_URL [--etherscan-api-key $ETHERSCAN_API_KEY --verify --chain-id $CHAIN_ID]`
 
-## Deployed Instance
+## Deployed Instance (FORKED)
 
-See the [v1 release](https://github.com/NoahZinsmeister/franchiser/releases/tag/v1).
+See the [v1 release](https://github.com/miggebril/franchiser/releases/tag/ArbV1).
 
-## Audit
+## Audit (ORIGINAL AUDIT OF [NoahZinsmeister](https://github.com/NoahZinsmeister/franchiser/compare/e652c7fe1716bc8e9ca1bb929238313eabb9ea52...main))
 
 This codebase was audited by [Trail of Bits](https://www.trailofbits.com/) as of commit [e652c7fe1716bc8e9ca1bb929238313eabb9ea52](https://github.com/NoahZinsmeister/franchiser/commit/e652c7fe1716bc8e9ca1bb929238313eabb9ea52). All changes made since this commit may be viewed [here](https://github.com/NoahZinsmeister/franchiser/compare/e652c7fe1716bc8e9ca1bb929238313eabb9ea52...main). The audit findings are summarized in issues which may be viewed [here](https://github.com/NoahZinsmeister/franchiser/issues?q=is%3Aissue+%28TOB). 
